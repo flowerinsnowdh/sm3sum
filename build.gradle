@@ -1,0 +1,39 @@
+plugins() {
+    id('java')
+    id('application')
+    id('com.github.johnrengelman.shadow').version('8.1.1')
+}
+
+group = 'online.flowerinsnow'
+version = '1.0.0'
+
+configurations() {
+    register('shade')
+    implementation.extendsFrom(shade)
+}
+
+repositories() {
+    mavenCentral()
+}
+
+dependencies {
+    shade('org.bouncycastle:bcprov-jdk18on:1.78.1')
+
+    testImplementation(platform('org.junit:junit-bom:5.10.2'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
+}
+
+test() {
+    useJUnitPlatform()
+}
+
+shadowJar() {
+    from('LICENSE')
+
+    mainClassName = 'online.flowerinsnow.sm3sum.SM3Sum'
+
+    configurations = [
+            project.configurations.shade
+    ]
+    archiveClassifier = ''
+}

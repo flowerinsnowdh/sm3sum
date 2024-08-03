@@ -5,7 +5,9 @@ plugins() {
 }
 
 group = 'online.flowerinsnow'
-version = '1.0.0'
+version = '1.0.1'
+
+mainClassName = 'online.flowerinsnow.sm3sum.SM3Sum'
 
 configurations() {
     register('shade')
@@ -30,8 +32,6 @@ test() {
 shadowJar() {
     from('LICENSE')
 
-    mainClassName = 'online.flowerinsnow.sm3sum.SM3Sum'
-
     configurations = [
             project.configurations.shade
     ]
@@ -51,6 +51,6 @@ tasks.startScripts() {
     dependsOn(shadowJar)
 }
 
-tasks.startShadowScripts() {
+tasks.shadowJar() {
     dependsOn(jar)
 }

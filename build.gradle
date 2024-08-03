@@ -37,3 +37,20 @@ shadowJar() {
     ]
     archiveClassifier = ''
 }
+
+shadowDistZip() {
+    archiveFileName = "${project.name}-${project.version}.zip"
+}
+
+shadowDistTar() {
+    compression = Compression.GZIP
+    archiveFileName = "${project.name}-${project.version}.tar.gz"
+}
+
+tasks.startScripts() {
+    dependsOn(shadowJar)
+}
+
+tasks.startShadowScripts() {
+    dependsOn(jar)
+}
